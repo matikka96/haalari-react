@@ -7,6 +7,8 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema({
 	postAuthor: String,
 	postCreatedDate: String,
+	postTitle: String,
+	postbody: String,
 	votes: [String],
 	picture: {
 		data: Buffer,
