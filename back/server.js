@@ -30,10 +30,24 @@ app.use(passport.session());
 // Set up routes
 const authRoutes = require('./routes/auth-routes');
 const postRoutes = require('./routes/post-routes');
-const commentRoutes = require('./routes/comment-routes');
+// const commentRoutes = require('./routes/comment-routes');
 app.use('/auth', authRoutes);
 app.use('/post', postRoutes);
-app.use('/comment', commentRoutes);
+// app.use('/comment', commentRoutes);
+
+const multer = require('multer');
+var upload = multer({ dest: './public/uploads/' })
+
+//
+app.post('/upload', upload.single('avatar'), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+})
+
+// 
+app.get('/', (req, res) => {
+	res.sendFile(__dirname+'/test.html');
+});
 
 // 
 app.get('/test', (req, res) => {
