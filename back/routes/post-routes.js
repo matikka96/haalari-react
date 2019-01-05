@@ -1,12 +1,16 @@
+
+// TODO
+////////////////////////////////////////////////////////
+// /create:
+// * verify filename
+// * max filesize
+////////////////////////////////////////////////////////
+
+
 const router = require('express').Router();
 const User = require('../models/user-model');
-// const Favorite = require('../models/favorite-model');
+const Post = require('../models/post-model');
 const keys = require('../config/keys');
-
-// Importing Axios
-// const axios = require('axios');
-
-"use strict";
 
 // Helper function for verifying if user is logged in
 const authCheck = (req, res, next) => {
@@ -18,6 +22,34 @@ const authCheck = (req, res, next) => {
 		next();
 	}
 };
+
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: './public/uploads/',
+  fileFilter: 'imageFilter',
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + req.user.id + '.jpg');
+  }
+});
+
+var upload = multer({ storage: storage });
+// var upload = multer({ 
+// 	dest: './public/uploads/',
+// 	fileFilter: imageFilter
+// })
+
+// Creating post object and saving to DB
+router.post('/create', upload.single('avatar'), function (req, res, next) {
+	// req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+	console.log(req.body);
+	console.log(req.file);
+
+	// SAVE TO DB HERE
+
+	res.redirect('/');
+})
 
 // Responds with the userID
 router.get('/', authCheck, (req, res) => {
