@@ -92,7 +92,7 @@ router.post('/unvote', authCheck, (req, res) => {
 	Post.update(
 		{_id : req.body.postId},
 		{$pull: {postVotes: {userId: req.user.id}}}
-	).then((response) => {
+		).then((response) => {
 		res.send(response);
 	});
 });
