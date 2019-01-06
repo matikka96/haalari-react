@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import NavBar from './navbar';
+import Config from '../config';
+
+const BACKURL = Config.URL.express;
+const PROXY = Config.URL.proxyurl;
 
 class creationForm extends Component {
     constructor() {
@@ -29,15 +34,22 @@ class creationForm extends Component {
         formData.append('postDescription', postDescription);
         formData.append('imageFile', imageFile);
 
-        axios.get("/auth/profile").then(response => {
+        axios.post(BACKURL+'/post/create').then(response => {
             console.log(response.data);
         })
           
     };
+    onTest = () => {
+        axios.get(BACKURL+"/test").then(response => {
+            console.log(response.data);
+        })
+    }
 
     render() { 
         const {postTitle, postDescription, imageFile} = this.state;
         return (
+            <>
+            <NavBar />
 
             <form onSubmit = {this.onSubmit}>
                 <p>title: </p>
@@ -60,8 +72,11 @@ class creationForm extends Component {
                     name="imageFile" 
                     onChange={this.onChange}
                     />
+
                 <button type="submit">Submit</button>
 	        </form>
+            <button onClick={this.onTest} >Test</button>
+            </>
         );
     }
 }

@@ -12,10 +12,10 @@ class Post extends Component {
                 <div>
                     <button onClick={() => this.props.onVote(this.props.post.id)} 
                         className="btn btn-primary btn-sm m-2">Like</button>
-                    <span 
+                    {/* <span 
                         className="badge badge-pill badge-primary m-2">
                         Votes {this.props.post.votes.length}               
-                    </span>
+                    </span> */}
 
                 </div>
            </div>

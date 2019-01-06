@@ -9,7 +9,7 @@ class Posts extends Component {
         <>
             {posts.map(post => (
                 <Post 
-                    key={post.id} 
+                    key={post._id} 
                     onVote={onVote}
                     onOpenPost={onOpenPost}
                     post={post}>
