@@ -8,12 +8,13 @@ const postSchema = new Schema({
 	postAuthor: String,
 	postCreatedDate: String,
 	postTitle: String,
-	postbody: String,
-	votes: [String],
-	picture: {
-		data: Buffer,
-		type: String
-	}
+	postDescription: String,
+	postVotes: [String],
+	postImg: String
+	// picture: {
+	// 	data: Buffer,
+	// 	type: String
+	// }
 });
 
 const Post = mongoose.model('post', postSchema);
