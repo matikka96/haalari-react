@@ -4,13 +4,14 @@ import Post from './post';
 class Posts extends Component {
     render() { 
         console.log(this.props);
-        const {onVote, posts} = this.props;
+        const {onVote, posts, onOpenPost} = this.props;
         return (
         <>
             {posts.map(post => (
                 <Post 
                     key={post.id} 
                     onVote={onVote}
+                    onOpenPost={onOpenPost}
                     post={post}>
                 </Post>
             ))}

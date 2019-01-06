@@ -3,6 +3,8 @@ import './App.css';
 import NavBar from './Components/navbar';
 import Posts from './Components/posts';
 import Post from './Components/post';
+import Form from './Components/form';
+import {BrowserRouter, Route} from 'react-router-dom';
 
 
 class App extends Component {
@@ -43,25 +45,40 @@ class App extends Component {
 
   }
 
+  handleOpenPost = post => {
+    const posts = [...this.state.posts];
+    const index = posts.indexOf( post );
+    console.log(index)
+    const tempid = posts[index].id;
+    console.log("Post clicked: "+tempid);
+  };
+
   handleVote = post => {
     console.log("Vote casted")
-    // const posts = [...this.state.posts];
-    // const index = posts.indexOf( post );
-    // posts[index] = { ...post };
-    // posts[index].votes.push("matti"+posts[index].votes.length+1);
-    // this.setState({ posts });
+ 
 };
 
   render() {
     console.log(this.props);
     return (
+      // <BrowserRouter>
+      // {/* <Route path="/new" component={}/>
+      // </BrowserRouter>
+      
       <>
         <NavBar totalPosts={this.state.posts.filter(c => c.value > 0).length}/>
         <main className="container">
         
-          <Posts 
+           <Posts 
             posts={this.state.posts}
-            onVote={this.handleVote}/>
+            onVote={this.handleVote}
+            onOpenPost={this.handleOpenPost}
+            
+            /> 
+            <Form>
+
+            </Form>
+      
         </main>
       </>
     );
