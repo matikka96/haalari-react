@@ -60,7 +60,7 @@ router.post('/create', authCheck, upload.single('imageFile'), (req, res, next) =
 })
 
 // Load all posts
-router.get('/loadall', authCheck, (req, res) => {
+router.get('/loadall', (req, res) => {
 	Post.find({}, (err, allPosts) => {
 		res.send(allPosts);
 	});

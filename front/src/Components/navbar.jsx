@@ -4,9 +4,10 @@ class NavBar extends Component {
     state = {  }
     render() { 
         return (
-            <nav className="navbar navbar-light bg-light fixedTop">
+            <nav className="navbar sticky-top navbar-dark bg-dark fixedTop">
+            	<a href="http://localhost:3001/auth/google"><button type="button" className="btn btn-secondary">Account</button></a>
                 <a className="navbar-brand" href="/">Haalarimerkkitori</a>
-                <a className="nav-link" href="/form">New Post<span className="sr-only">(current)</span></a>
+                <a href="/form"><button type="button" className="btn btn-secondary">New Post</button></a>
             </nav>
         );  
         

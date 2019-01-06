@@ -10,6 +10,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 const PORT = 3001;
 
+// Enable CORS
+const cors = require('cors');
+app.use(cors());
+
 // Connect to mongodb with mongoose
 const mongoose = require('mongoose');
 mongoose.connect(keys.mongodb.uri, () => {

@@ -17,6 +17,7 @@ class Home extends Component {
   componentDidMount(){
     console.log("Home - Mounted")
     this.loadAllPosts();
+
     // this.callBackendAPI()
     //   .then(res => this.setState({ data: res.express }))
     //   .catch(err => console.log(err));
@@ -34,9 +35,16 @@ class Home extends Component {
 
   loadAllPosts = () => {
     console.log("Loading");
-    fetch("/post/loadall")
-    .then(res => res.json())
-    .then(posts => this.setState({posts}))
+    
+    // Axios API request
+    axios.get('http://localhost:3001/post/loadall').then((res) => {
+      console.log(res.data);
+      this.setState({posts: res.data})
+    })
+
+    // fetch("/post/loadall")
+    // .then(res => res.json())
+    // .then(posts => this.setState({posts}))
   }
 
   loadPost = () => {
