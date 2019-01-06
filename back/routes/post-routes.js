@@ -41,7 +41,7 @@ var upload = multer({ storage: storage });
 // })
 
 // Creating post object and saving to DB
-router.post('/create', authCheck, upload.single('avatar'), (req, res, next) => {
+router.post('/create', authCheck, upload.single('imageFile'), (req, res, next) => {
 	console.log(req.body);
 	console.log(req.file);
 
@@ -50,7 +50,7 @@ router.post('/create', authCheck, upload.single('avatar'), (req, res, next) => {
 		postCreatedDate: Date.now(),
 		postTitle: req.body.postTitle,
 		postDescription: req.body.postDescription,
-		postVotes: [String],
+		postVotes: [],
 		postImg: req.file.path
 	});
 	newPost.save().then((x) => {
@@ -67,10 +67,34 @@ router.get('/loadall', authCheck, (req, res) => {
 });
 
 // Load spesific post
-router.get('/load', authCheck, (res, req) => {
-	Post.findOne({id : req.body.postId}).then((response) => {
+router.post('/load', authCheck, (req, res) => {
+	console.log(req.body);
+	Post.findOne({_id : req.body.postId}).then((response) => {
+		console.log(response);
 		res.send(response);
 	})
+});
+
+// Vote spesific post
+router.post('/vote', authCheck, (req, res) => {
+	let user = {userId: req.user.id}
+	Post.findOneAndUpdate(
+		{_id : req.body.postId},
+		{$push: {postVotes: user}}
+		).then((response) => {
+		res.send(response);
+	})
+});
+
+// Unvote spesific post
+router.post('/unvote', authCheck, (req, res) => {
+	console.log(req.user.id);
+	Post.update(
+		{_id : req.body.postId},
+		{$pull: {postVotes: {userId: req.user.id}}}
+	).then((response) => {
+		res.send(response);
+	});
 });
 
 // Responds with the userID

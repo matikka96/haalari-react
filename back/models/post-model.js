@@ -9,7 +9,7 @@ const postSchema = new Schema({
 	postCreatedDate: String,
 	postTitle: String,
 	postDescription: String,
-	postVotes: [String],
+	postVotes: [{userId: String}],
 	postImg: String
 	// picture: {
 	// 	data: Buffer,
