@@ -5,13 +5,19 @@
 	<title>API test</title>
 </head>
 <body>
+
 	<div>
 		<button onclick="loadProfile()">load profile</button>
+		<button onclick="loadAllPosts()">load all posts</button>
 	</div>
-	<form onsubmit="createPost()">
-		<h3>Creating new post</h3>
-	</form>
+
+	<div>
+		<input type="text" id="post-id">
+		<button onclick="loadPost()">load post</button>
+	</div>
+
 	<form action="/post/create" method="post" enctype="multipart/form-data">
+		<h3>Creating new post</h3>
 		<p>title: </p>
 		<input type="text" name="postTitle" id="postTitle" required>
 		<p>description: </p>
@@ -27,6 +33,19 @@
 	<script>
 		function loadProfile() {
 		  axios.get("/auth/profile").then(response => {
+        console.log(response.data);
+      })
+		}
+
+		function loadAllPosts() {
+		  axios.get("/post/loadall").then(response => {
+        console.log(response.data);
+      })
+		}
+
+		function loadPost() {
+			let id = document.getElementById('post-id').value;
+		  axios.get("/post/loadall", {postId : id}).then(response => {
         console.log(response.data);
       })
 		}

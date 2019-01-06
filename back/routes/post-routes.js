@@ -41,16 +41,37 @@ var upload = multer({ storage: storage });
 // })
 
 // Creating post object and saving to DB
-router.post('/create', upload.single('avatar'), function (req, res, next) {
-	// req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
+router.post('/create', authCheck, upload.single('avatar'), (req, res, next) => {
 	console.log(req.body);
 	console.log(req.file);
 
-	// SAVE TO DB HERE
-
+	let newPost = new Post({
+		postAuthor: req.user.id,
+		postCreatedDate: Date.now(),
+		postTitle: req.body.postTitle,
+		postDescription: req.body.postDescription,
+		postVotes: [String],
+		postImg: req.file.path
+	});
+	newPost.save().then((x) => {
+		console.log('Saved: '+x);
+	})
 	res.redirect('/');
 })
+
+// Load all posts
+router.get('/loadall', authCheck, (req, res) => {
+	Post.find({}, (err, allPosts) => {
+		res.send(allPosts);
+	});
+});
+
+// Load spesific post
+router.get('/load', authCheck, (res, req) => {
+	Post.findOne({id : req.body.postId}).then((response) => {
+		res.send(response);
+	})
+});
 
 // Responds with the userID
 router.get('/', authCheck, (req, res) => {
