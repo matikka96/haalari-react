@@ -12,7 +12,7 @@ class Post extends Component {
                 <h3 className="">{this.props.post.postTitle}</h3>
                 <img src={imageurl} 
                     onClick={() => this.props.onOpenPost(this.props.post)}
-                    className="text-center img-fluid" alt=""/>
+                    className="text-center img-fluid" alt="image"/>
                 <div>
                     <button onClick={() => this.props.onVote(this.props.post.id)} 
                         className="btn btn-primary btn-sm m-2">Like</button>

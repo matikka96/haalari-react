@@ -52,30 +52,39 @@ class creationForm extends Component {
             <NavBar />
             <main className="container col-md-6 col-md-offset-3">
                 <form onSubmit = {this.onSubmit}>
-                    <p>title: </p>
-                    <input 
-                        type="text" 
-                        name="postTitle" 
-                        value={postTitle}
-                        onChange={this.onChange}
-                        />
-                    <p>description: </p>
-                    <input 
-                        type="text" 
-                        name="postDescription" 
-                        value={postDescription}
-                        onChange={this.onChange}
-                        />
-                    <p>picture: </p>
-                    <input 
-                        type="file" 
-                        name="imageFile" 
-                        onChange={this.onChange}
-                        />
+                    <div className="form-group">
+                        <label for="form-title">Title: </label>
+                        <input
+                            className="form-control"
+                            type="text" 
+                            name="postTitle" 
+                            value={postTitle}
+                            onChange={this.onChange}
+                            />
+                    </div>                    
+                    <div className="form-group">
+                        <label for="form-description">Description: </label>
+                        <input
+                            className="form-control"
+                            type="text" 
+                            name="postDescription" 
+                            value={postDescription}
+                            onChange={this.onChange}
+                            />
+                    </div>
+                    <div className="form-group">
+                        <label for="form-image">Image: </label>
+                        <input
+                            className="form-control"
+                            type="file" 
+                            name="imageFile" 
+                            onChange={this.onChange}
+                            />
+                    </div>
 
-                    <button type="submit">Submit</button>
+                    <button className="btn btn-primary" type="submit">Submit</button>
                 </form>
-                <button onClick={this.onTest} >Test</button>
+                <button className="btn btn-primary" onClick={this.onTest} >Test</button>
             </main>
             </>
         );
