@@ -14,6 +14,9 @@ class Post extends Component {
                     onClick={() => this.props.onOpenPost(this.props.post)}
                     className="text-center img-fluid" alt=""/>
                 <div>
+                    <p>
+                        {this.props.post.postDescription}
+                    </p>
                     <button onClick={() => this.props.onVote(this.props.post.id)} 
                         className="btn btn-primary btn-sm m-2">Like</button>
                     {/* <span 

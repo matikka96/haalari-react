@@ -77,9 +77,7 @@ class Home extends Component {
       <>
         <NavBar>
           <li class="nav-item active">
-            <a class="nav-link" href="/form">
-              New Post <span class="sr-only">(current)</span>
-            </a>
+           
           </li>
         </NavBar>
         <main className="container col-md-6 col-md-offset-3">
