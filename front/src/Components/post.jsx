@@ -8,7 +8,7 @@ class Post extends Component {
         console.log(this.props);
         const imageurl = BACKURL+'/'+this.props.post.postImg;
         return (       
-            <div className="container col-md-6 col-md-offset-3">
+            <div className="">
                 <h3 className="">{this.props.post.postTitle}</h3>
                 <img src={imageurl} 
                     onClick={() => this.props.onOpenPost(this.props.post)}

@@ -50,32 +50,33 @@ class creationForm extends Component {
         return (
             <>
             <NavBar />
+            <main className="container col-md-6 col-md-offset-3">
+                <form onSubmit = {this.onSubmit}>
+                    <p>title: </p>
+                    <input 
+                        type="text" 
+                        name="postTitle" 
+                        value={postTitle}
+                        onChange={this.onChange}
+                        />
+                    <p>description: </p>
+                    <input 
+                        type="text" 
+                        name="postDescription" 
+                        value={postDescription}
+                        onChange={this.onChange}
+                        />
+                    <p>picture: </p>
+                    <input 
+                        type="file" 
+                        name="imageFile" 
+                        onChange={this.onChange}
+                        />
 
-            <form onSubmit = {this.onSubmit}>
-                <p>title: </p>
-                <input 
-                    type="text" 
-                    name="postTitle" 
-                    value={postTitle}
-                    onChange={this.onChange}
-                    />
-                <p>description: </p>
-                <input 
-                    type="text" 
-                    name="postDescription" 
-                    value={postDescription}
-                    onChange={this.onChange}
-                    />
-                <p>picture: </p>
-                <input 
-                    type="file" 
-                    name="imageFile" 
-                    onChange={this.onChange}
-                    />
-
-                <button type="submit">Submit</button>
-	        </form>
-            <button onClick={this.onTest} >Test</button>
+                    <button type="submit">Submit</button>
+                </form>
+                <button onClick={this.onTest} >Test</button>
+            </main>
             </>
         );
     }

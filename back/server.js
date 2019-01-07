@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 
 // 
 app.get('/test', (req, res) => {
-	res.send('wörks lol');
+	res.send(req.user);
 });
 
 // Listening PORT

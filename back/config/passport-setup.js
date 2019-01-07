@@ -29,7 +29,8 @@ passport.use(
 					username: profile.displayName,
 					googleId: profile.id,
 					// email: profile.email,
-					dateOfCreation: Date.now()
+					dateOfCreation: Date.now(),
+					token: accessToken
 				}).save().then((newUser) => {
 					console.log('New user: '+newUser);
 					done(null, newUser);
