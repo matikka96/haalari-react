@@ -16,6 +16,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route path='/form' component={Form}/>
+          <Route path='http://localhost:3001/'/>
         </Switch>
       </div>
     )
