@@ -5,7 +5,6 @@ const BACKURL = Config.URL.express;
 
 class Post extends Component {
     render() { 
-        console.log(this.props);
         const imageurl = BACKURL+'/'+this.props.post.postImg;
         return (       
             <div className="">
@@ -17,7 +16,7 @@ class Post extends Component {
                     <p>
                         {this.props.post.postDescription}
                     </p>
-                    <button onClick={() => this.props.onVote(this.props.post.id)} 
+                    <button onClick={() => this.props.onVote(this.props.post._id)} 
                         className="btn btn-primary btn-sm m-2">Like</button>
                     {/* <span 
                         className="badge badge-pill badge-primary m-2">

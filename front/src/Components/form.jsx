@@ -4,7 +4,6 @@ import NavBar from './navbar';
 import Config from '../config';
 
 const BACKURL = Config.URL.express;
-const PROXY = Config.URL.proxyurl;
 
 class creationForm extends Component {
     constructor() {

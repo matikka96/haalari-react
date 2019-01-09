@@ -3,14 +3,14 @@ import Post from './post';
 
 class Posts extends Component {
     render() { 
-        console.log(this.props);
-        const {onVote, posts, onOpenPost} = this.props;
+        const {onVote, onUnvote, posts, onOpenPost} = this.props;
         return (
         <>
-            {posts.map(post => (
+            {posts.reverse().map(post => (
                 <Post 
                     key={post._id} 
                     onVote={onVote}
+                    onUnvote={onUnvote}
                     onOpenPost={onOpenPost}
                     post={post}>
                 </Post>
