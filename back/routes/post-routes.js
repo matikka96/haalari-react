@@ -30,7 +30,8 @@ function verifyUser(req, res, next) {
 			    if (currentUser) {
 			      console.log('User found');
 			      // done(null, currentUser);
-			      req.userId = userId;
+			      // req.user._id = userId;
+			      req.user = currentUser;
 			      next();
 			    } else {
 			      res.json({message: 'User not found'});
@@ -40,20 +41,8 @@ function verifyUser(req, res, next) {
 	  });
 }
 
-// DEPRECATED
-// Helper function for verifying if user is logged in
-// const authCheck = (req, res, next) => {
-// 	var user = req.user;
-// 	if (!user) {
-// 		console.log("User not logged in");
-// 		res.send('login');
-// 	} else {
-// 		next();
-// 	}
-// };
-
 router.post('/test', verifyUser, (req, res) => {
-	console.log('/test: Verified as userId: '+req.userId);
+	console.log('/test: Verified as user (Id): '+req.user._id);
 	res.send('ok');
 });
 
@@ -68,10 +57,6 @@ const storage = multer.diskStorage({
 });
 
 var upload = multer({ storage: storage });
-// var upload = multer({ 
-// 	dest: './public/uploads/',
-// 	fileFilter: imageFilter
-// })
 
 // Creating post object and saving to DB
 router.post('/create', verifyUser, upload.single('imageFile'), (req, res, next) => {
@@ -110,12 +95,12 @@ router.post('/load', verifyUser, (req, res) => {
 
 // Vote spesific post
 router.post('/vote', verifyUser, (req, res) => {
-	let user = {userId: req.userId};
+	let user = {userId: req.user._id};
 	Post.findOneAndUpdate(
 		{_id : req.body.postId},
 		{$push: {postVotes: user}}
 		).then((response) => {
-		res.send(`Post with id: ${req.userId} voted`);
+		res.send(`Post with id: ${req.user._id} voted`);
 	})
 });
 
@@ -123,17 +108,17 @@ router.post('/vote', verifyUser, (req, res) => {
 router.post('/unvote', verifyUser, (req, res) => {
 	Post.update(
 		{_id : req.body.postId},
-		{$pull: {postVotes: {userId: req.userId}}}
+		{$pull: {postVotes: {userId: req.user._id}}}
 		).then((response) => {
-		res.send(`Post with id: ${req.userId} unvoted`);
+		res.send(`Post with id: ${req.user._id} unvoted`);
 	});
 });
 
-// // Responds with the userID
-// router.get('/', verifyUser, (req, res) => {
-// 	console.log(req.user);
-// 	res.send(req.user);
-// });
+// Responds with the userID
+router.get('/', verifyUser, (req, res) => {
+	console.log(req.user);
+	res.send(req.user);
+});
 
 
 

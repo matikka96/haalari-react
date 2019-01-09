@@ -21,7 +21,7 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   console.log('Creating JWT token: ')
   jwt.sign({user: req.user._id}, keys.jwt.secret, (err, token) => {
     console.log(token);    
-    res.redirect('http://localhost:3001/?token='+token)
+    res.redirect(req.headers.referer+'?token='+token);
   });
 });
 
