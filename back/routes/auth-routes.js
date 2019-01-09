@@ -25,15 +25,4 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   });
 });
 
-// 
-router.get("/user/:token", (req, res) => {
-  console.log(req.params);
-  red.send(req.params.token);
-});
-
-// callback route for google to redirect to
-router.get("/profile", (req, res) => {
-  res.send(req.user);
-});
-
 module.exports = router;

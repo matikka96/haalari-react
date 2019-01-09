@@ -52,7 +52,7 @@
 
 		function testAuth() {
 			console.log('triggered');
-			axios.post('/post/test', {token: userToken}).then((response) => {
+			axios.post('/user/test', {token: userToken}).then((response) => {
 				console.log(response.data)
 			})
 		}
@@ -64,34 +64,34 @@
 		}
 
 		function loadProfile() {
-		  axios.get("/auth/profile").then(response => {
+		  axios.post("/user/profile", {token: userToken}).then(response => {
         console.log(response.data);
       })
 		}
 
 		function loadAllPosts() {
-		  axios.get("/post/loadall").then(response => {
+		  axios.get("/public/loadall").then(response => {
         console.log(response.data);
       })
 		}
 
 		function loadPost() {
 			let id = document.getElementById('post-id').value;
-		  axios.post("/post/load", {token: userToken, postId : id}).then(response => {
+		  axios.post("/user/load", {token: userToken, postId : id}).then(response => {
         console.log(response.data);
       })
 		}
 
 		function votePost() {
 			let id = document.getElementById('post-id').value;
-		  axios.post("/post/vote", {token: userToken, postId : id}).then(response => {
+		  axios.post("/user/vote", {token: userToken, postId : id}).then(response => {
         console.log(response.data);
       })
 		}
 
 	  function unvotePost() {
 			let id = document.getElementById('post-id').value;
-		  axios.post("/post/unvote", {token: userToken, postId : id}).then(response => {
+		  axios.post("/user/unvote", {token: userToken, postId : id}).then(response => {
         console.log(response.data);
       })
 		}

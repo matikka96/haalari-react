@@ -33,10 +33,12 @@ app.use(passport.session());
 
 // Set up routes
 const authRoutes = require('./routes/auth-routes');
-const postRoutes = require('./routes/post-routes');
+const userRoutes = require('./routes/user-routes');
+const publicRoutes = require('./routes/public-routes');
 // const commentRoutes = require('./routes/comment-routes');
 app.use('/auth', authRoutes);
-app.use('/post', postRoutes);
+app.use('/user', userRoutes);
+app.use('/public', publicRoutes);
 // app.use('/comment', commentRoutes);
 
 

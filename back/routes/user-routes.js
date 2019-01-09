@@ -7,13 +7,11 @@
 ////////////////////////////////////////////////////////
 // https://blog.stvmlbrn.com/2017/12/17/upload-files-using-react-to-node-express-server.html
 
-
 const router = require('express').Router();
 const User = require('../models/user-model');
 const Post = require('../models/post-model');
 const keys = require('../config/keys');
 const jwt = require("jsonwebtoken");
-
 
 // Verify user with JWT
 function verifyUser(req, res, next) {	
@@ -37,17 +35,18 @@ function verifyUser(req, res, next) {
 			      res.json({message: 'User not found'});
 			    }
 			  })
-			}
-	  });
+				}
+	});
 }
 
 router.post('/test', verifyUser, (req, res) => {
 	console.log('/test: Verified as user (Id): '+req.user._id);
+	resetUser()
 	res.send('ok');
 });
 
+// MULTER SETUP
 const multer = require('multer');
-
 const storage = multer.diskStorage({
   destination: './public/uploads/',
   fileFilter: 'imageFilter',
@@ -55,7 +54,6 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + '-' + req.user.id + '.jpg');
   }
 });
-
 var upload = multer({ storage: storage });
 
 // Creating post object and saving to DB
@@ -74,24 +72,9 @@ router.post('/create', verifyUser, upload.single('imageFile'), (req, res, next) 
 	newPost.save().then((x) => {
 		console.log('Saved: '+x);
 	})
+	resetUser()
 	res.redirect('/');
 })
-
-// Load all posts
-router.get('/loadall', (req, res) => {
-	Post.find({}, (err, allPosts) => {
-		res.send(allPosts);
-	});
-});
-
-// Load spesific post
-router.post('/load', verifyUser, (req, res) => {
-	// console.log(req.body);
-	Post.findOne({_id : req.body.postId}).then((response) => {
-		// console.log(response);
-		res.send(response);
-	})
-});
 
 // Vote spesific post
 router.post('/vote', verifyUser, (req, res) => {
@@ -100,7 +83,8 @@ router.post('/vote', verifyUser, (req, res) => {
 		{_id : req.body.postId},
 		{$push: {postVotes: user}}
 		).then((response) => {
-		res.send(`Post with id: ${req.user._id} voted`);
+			resetUser()
+			res.send(`Post with id: ${req.user._id} voted`);
 	})
 });
 
@@ -110,16 +94,14 @@ router.post('/unvote', verifyUser, (req, res) => {
 		{_id : req.body.postId},
 		{$pull: {postVotes: {userId: req.user._id}}}
 		).then((response) => {
-		res.send(`Post with id: ${req.user._id} unvoted`);
+			resetUser()
+			res.send(`Post with id: ${req.user._id} unvoted`);
 	});
 });
 
-// Responds with the userID
-router.get('/', verifyUser, (req, res) => {
-	console.log(req.user);
+router.post('/profile', verifyUser, (req, res) => {
 	res.send(req.user);
-});
-
+})
 
 
 module.exports = router;
