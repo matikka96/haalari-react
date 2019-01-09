@@ -3,35 +3,32 @@ import NavBar from "./navbar";
 import Posts from "./posts";
 import axios from "axios";
 import Config from "../config";
-import queryString from "query-string";
 
-const BACKURL = Config.URL.express;
-const PROXY = Config.URL.proxyurl;
+const SERVER = Config.URL.express;
 
 class Home extends Component {
   constructor(props) {
     super(props);
     console.log("Home - Constructor");
+    
   }
 
   componentDidMount() {
     console.log("Home - Mounted");
     this.loadAllPosts();
-    var query = queryString.parse(this.props.location.search);
-    if (query.token) {
-      window.localStorage.setItem("jwt", query.token);
-      this.props.history.push("/");
-      console.log(this.props.location.search);
-
-    }
-    // this.callBackendAPI()
-    //   .then(res => this.setState({ data: res.express }))
-    //   .catch(err => console.log(err));
+    this.getToken();
   }
 
   state = {
-    posts: []
+    posts: [],
+    userToken: ''
   };
+
+  getToken = () => {
+    let token = this.props.location.search.split('?token=')[1];
+    this.setState({userToken: token});
+    console.log(token);
+  }
 
   loadProfile = () => {
     axios.get("auth/profile").then(res => {
@@ -41,24 +38,18 @@ class Home extends Component {
 
   loadAllPosts = () => {
     console.log("Loading");
-
     // Axios API request
-    axios.get("http://localhost:3001/post/loadall").then(res => {
-      console.log(res.data);
+    axios.get(SERVER+"/public/loadall").then(res => {
       this.setState({ posts: res.data });
     });
-
-    // fetch("/post/loadall")
-    // .then(res => res.json())
-    // .then(posts => this.setState({posts}))
   };
 
-  loadPost = () => {
-    let id = document.getElementById("post-id").value;
-    axios.get("/post/loadall", { postId: id }).then(res => {
-      console.log(res.data);
-    });
-  };
+  // loadPost = () => {
+  //   let id = document.getElementById("post-id").value;
+  //   axios.get("/post/loadall", { postId: id }).then(res => {
+  //     console.log(res.data);
+  //   });
+  // };
 
   handleOpenPost = post => {
     const posts = [...this.state.posts];
@@ -68,9 +59,17 @@ class Home extends Component {
     console.log("Post clicked: " + tempid);
   };
 
-  handleVote = post => {
-    console.log("Vote casted");
+  handleVote = postid => {
+		  axios.post("/user/vote", {token: this.state.userToken, postId : postid}).then(response => {
+        console.log(response.data);
+      })
   };
+
+  handleUnvote = postid => {
+    axios.post("/user/unvote", {token: this.state.userToken, postId : postid}).then(response => {
+      console.log(response.data);
+    })
+};
 
   render() {
     return (
@@ -84,6 +83,7 @@ class Home extends Component {
           <Posts
             posts={this.state.posts}
             onVote={this.handleVote}
+            onUnvote={this.handleUnvote}
             onOpenPost={this.handleOpenPost}
           />
         </main>
