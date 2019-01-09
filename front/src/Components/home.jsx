@@ -43,7 +43,7 @@ class Home extends Component {
     console.log("Loading");
 
     // Axios API request
-    axios.get("http://localhost:3001/post/loadall").then(res => {
+    axios.get("http://localhost:3001/public/loadall").then(res => {
       console.log(res.data);
       this.setState({ posts: res.data });
     });

@@ -41,7 +41,7 @@ function verifyUser(req, res, next) {
 
 router.post('/test', verifyUser, (req, res) => {
 	console.log('/test: Verified as user (Id): '+req.user._id);
-	resetUser()
+	
 	res.send('ok');
 });
 
@@ -72,7 +72,7 @@ router.post('/create', verifyUser, upload.single('imageFile'), (req, res, next) 
 	newPost.save().then((x) => {
 		console.log('Saved: '+x);
 	})
-	resetUser()
+	
 	res.redirect('/');
 })
 
@@ -83,7 +83,7 @@ router.post('/vote', verifyUser, (req, res) => {
 		{_id : req.body.postId},
 		{$push: {postVotes: user}}
 		).then((response) => {
-			resetUser()
+			
 			res.send(`Post with id: ${req.user._id} voted`);
 	})
 });
@@ -94,7 +94,7 @@ router.post('/unvote', verifyUser, (req, res) => {
 		{_id : req.body.postId},
 		{$pull: {postVotes: {userId: req.user._id}}}
 		).then((response) => {
-			resetUser()
+			
 			res.send(`Post with id: ${req.user._id} unvoted`);
 	});
 });
