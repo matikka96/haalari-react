@@ -84,7 +84,7 @@ class creationForm extends Component {
 
                     <button className="btn btn-primary" type="submit">Submit</button>
                 </form>
-                <button className="btn btn-primary" onClick={this.onTest} >Test</button>
+                {/* <button className="btn btn-primary" onClick={this.onTest} >Test</button> */}
             </main>
             </>
         );

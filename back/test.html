@@ -4,8 +4,10 @@
 	<meta charset="UTF-8">
 	<title>API test</title>
 </head>
-<body>
-
+<body onload="mountSessions()">
+	
+	<a href="/auth/google"><button>login</button></a>
+	<button onclick="testAuth()">test</button>
 	<button onclick="loadProfile()">load profile</button>
 
 	<div>
@@ -32,6 +34,35 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 	<script>
+
+		// User token
+		let userToken;
+
+		function mountSessions() {
+			//Update token to local storage
+			let token = window.location.href.split('?token=')[1];
+			if (token) {
+				console.log('token: '+token);
+				// Put the object into storage
+				localStorage.setItem('token', token);
+			}
+			// Retrieve the object from storage
+			userToken = localStorage.getItem('token');
+		}
+
+		function testAuth() {
+			console.log('triggered');
+			axios.post('/post/test', {token: userToken}).then((response) => {
+				console.log(response.data)
+			})
+		}
+
+		function login() {
+			axios.get('/auth/google').then((response) => {
+				console.log(response);
+			})
+		}
+
 		function loadProfile() {
 		  axios.get("/auth/profile").then(response => {
         console.log(response.data);
@@ -46,21 +77,21 @@
 
 		function loadPost() {
 			let id = document.getElementById('post-id').value;
-		  axios.post("/post/load", {postId : id}).then(response => {
+		  axios.post("/post/load", {token: userToken, postId : id}).then(response => {
         console.log(response.data);
       })
 		}
 
 		function votePost() {
 			let id = document.getElementById('post-id').value;
-		  axios.post("/post/vote", {postId : id}).then(response => {
+		  axios.post("/post/vote", {token: userToken, postId : id}).then(response => {
         console.log(response.data);
       })
 		}
 
 	  function unvotePost() {
 			let id = document.getElementById('post-id').value;
-		  axios.post("/post/unvote", {postId : id}).then(response => {
+		  axios.post("/post/unvote", {token: userToken, postId : id}).then(response => {
         console.log(response.data);
       })
 		}

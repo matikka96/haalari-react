@@ -12,5 +12,8 @@ module.exports = {
 	// Key for encrypting cookies (any string will do)
 	session: {
 		cookieKey: 'mazaboyissoawesomeyeag'
+	},
+	jwt: {
+		secret: 'kfhkfhakfdaskdjwf'
 	}
 };
