@@ -74,11 +74,7 @@ class Home extends Component {
   render() {
     return (
       <>
-        <NavBar>
-          <li class="nav-item active">
-           
-          </li>
-        </NavBar>
+        <NavBar/>
         <main className="container col-md-6 col-md-offset-3">
           <Posts
             posts={this.state.posts}

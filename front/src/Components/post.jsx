@@ -8,7 +8,8 @@ class Post extends Component {
         const imageurl = BACKURL+'/'+this.props.post.postImg;
         return (
             <div className="card mx-auto" style={{maxWidth: 400}}>
-              <img src={imageurl} 
+              <img src={imageurl}
+                alt="patch"
                 onClick={() => this.props.onOpenPost(this.props.post)}
                 className="card-img-top" />
               <div className="card-body">
@@ -21,7 +22,7 @@ class Post extends Component {
                     onClick={() => this.props.onVote(this.props.post._id)}
                     >Vote
                 </button>
-                <span class="badge badge-success m-2">{this.props.post.postVotes.length}</span>
+                <span className="badge badge-success m-2">{this.props.post.postVotes.length}</span>
               </div>
             </div>
         );

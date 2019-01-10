@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Home from './Components/home';
 import Form from './Components/form';
+import Profile from './Components/profile';
 import { Route, Switch } from 'react-router-dom';
 
 
@@ -18,8 +19,8 @@ state= {
 
   getToken = () => {
     let token = window.location.href.split('?token=')[1];
-    console.log("TOKEN:"+token);
 			if (token) {
+        console.log("TOKEN:"+token);
 				// Put the object into storage
 				localStorage.setItem('token', token);
 			}
@@ -28,12 +29,13 @@ state= {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const App = () => (
       <div>
         <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route path='/form' component={Form}/>
+          <Route exact path='/' component={Home} />
+          <Route path='/form' component={Form} />
+          <Route path='/profile' component={Profile} state={this.state} />
           <Route path='http://localhost:3001/'/>
         </Switch>
       </div>

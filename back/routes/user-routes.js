@@ -27,8 +27,6 @@ function verifyUser(req, res, next) {
 		    User.findOne({_id: userId}).then((currentUser) => {
 			    if (currentUser) {
 			      console.log('User found');
-			      // done(null, currentUser);
-			      // req.user._id = userId;
 			      req.user = currentUser;
 			      next();
 			    } else {
@@ -100,6 +98,7 @@ router.post('/unvote', verifyUser, (req, res) => {
 });
 
 router.post('/profile', verifyUser, (req, res) => {
+	console.log('/profile')
 	res.send(req.user);
 })
 
