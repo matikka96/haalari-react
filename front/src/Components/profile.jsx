@@ -15,8 +15,17 @@ class Profile extends Component {
   componentDidMount() {
     console.log("Profile - Mounted");
     console.log(localStorage.getItem('token').replace('"',''))
-    this.setState({userToken: localStorage.getItem('token').replace('"','')}, 
-    	this.loadProfile())
+    this.getToken();
+  }
+
+  state = {
+    userToken: ''
+  }
+
+  getToken = () => {
+    let token = this.props.location.search.split('?token=')[1];
+    this.setState({userToken: token});
+    console.log(token);
   }
 
   loadProfile = () => {
@@ -26,10 +35,6 @@ class Profile extends Component {
       console.log(response.data);
     })
   }
-
-	state = {
-		userToken : ""
-	}
 
 	render() {
 		return (
