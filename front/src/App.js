@@ -4,28 +4,46 @@ import Home from './Components/home';
 import Form from './Components/form';
 import Profile from './Components/profile';
 import { Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      userToken: "",
+      isLoggedIn: false
+    }
+  }
+  
   componentDidMount(){
     console.log('App - Mounted');
     //Update token to local storage
 		this.getToken();
   }
-state= {
-  userToken: "",
-  isLoggedIn: false
-}
+  
+
+  getUserInfo = () => {
+      axios.post("/user/profile", {token: this.state.userToken}).then(response => {
+        console.log(response.data);
+      })
+  };
+  
 
   getToken = () => {
     let token = window.location.href.split('?token=')[1];
+    console.log(token);
+    
 			if (token) {
-        console.log("TOKEN:"+token);
 				// Put the object into storage
-				localStorage.setItem('token', token);
-			}
-			// Retrieve the object from storage
-			this.setState({userToken: localStorage.getItem('token')})
+        localStorage.setItem('token', token);
+        console.log(localStorage.getItem('token'));
+        this.setState({userToken: localStorage.getItem('token')}, () => {
+          console.log(this.state);
+          this.getUserInfo();
+        })
+      }
   }
 
   render() {

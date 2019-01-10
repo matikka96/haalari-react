@@ -7,11 +7,7 @@ import Config from "../config";
 const SERVER = Config.URL.express;
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    console.log("Home - Constructor");
-    
-  }
+  
 
   componentDidMount() {
     console.log("Home - Mounted");
@@ -27,7 +23,6 @@ class Home extends Component {
   getToken = () => {
     let token = this.props.location.search.split('?token=')[1];
     this.setState({userToken: token});
-    console.log(token);
   }
 
   loadProfile = () => {
@@ -37,7 +32,7 @@ class Home extends Component {
   };
 
   loadAllPosts = () => {
-    console.log("Loading");
+    console.log("Loading posts");
     // Axios API request
     axios.get(SERVER+"/public/loadall").then(res => {
       this.setState({ posts: res.data });
@@ -60,8 +55,12 @@ class Home extends Component {
   };
 
   handleVote = postid => {
-		  axios.post("/user/vote", {token: this.state.userToken, postId : postid}).then(response => {
+      console.log(this.state.posts.find(post => post._id == postid))
+      let post = this.state.posts.find(post => post._id == postid)
+      if(post.postVotes)
+      axios.post("/user/vote", {token: this.state.userToken, postId : postid}).then(response => {
         console.log(response.data);
+        this.loadAllPosts();
       })
   };
 
