@@ -12,10 +12,10 @@ class App extends Component {
     //Update token to local storage
 		this.getToken();
   }
-state= {
-  userToken: "",
-  isLoggedIn: false
-}
+  state= {
+    userToken: "",
+    isLoggedIn: false
+  }
 
   getToken = () => {
     let token = window.location.href.split('?token=')[1];

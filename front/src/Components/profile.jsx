@@ -14,36 +14,33 @@ class Profile extends Component {
 
   componentDidMount() {
     console.log("Profile - Mounted");
-    console.log(localStorage.getItem('token').replace('"',''))
-    this.getToken();
+    // let token = localStorage.getItem('token');
+    // if (token) {
+    //   this.setState({userToken: token.replace('"','')});
+    //   console.log('User loaded')
+    // } else {
+    //   console.log('User not logged')
+    // }
   }
 
   state = {
-    userToken: ''
+    user: 'Matti'
   }
 
-  getToken = () => {
-    let token = this.props.location.search.split('?token=')[1];
-    this.setState({userToken: token});
-    console.log(token);
-  }
-
-  loadProfile = () => {
-  	
-  	// Retrieve the object from storage
-		axios.post(SERVER+"/user/profile", {token: this.state.userToken}).then(response => {
-      console.log(response.data);
-    })
-  }
+  // loadProfile = () => {
+  // 	// Retrieve the object from storage
+		// axios.post(SERVER+"/user/profile", {token: this.state.userToken}).then(response => {
+  //     console.log(response.data);
+  //   })
+  // }
 
 	render() {
 		return (
 			<div>
 				<NavBar />
 				<div className="container">
-					
+          <p>User: {this.state.user}</p>
 				</div>
-				
 			</div>
 		);
 	}
