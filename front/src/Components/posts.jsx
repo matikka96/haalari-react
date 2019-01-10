@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Post from './post';
 
 class Posts extends Component {
+    componentDidMount() {
+      this.props.onLoadAll();
+    }
+    
     render() { 
         const {onVote, onUnvote, posts, onOpenPost} = this.props;
         return (
