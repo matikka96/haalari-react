@@ -9,7 +9,8 @@ const SERVER = Config.URL.express;
 class Home extends Component {
   componentDidMount() {
     console.log("Home - Mounted");
-    this.getToken();
+    // this.getToken();
+
   }
 
   state = {
@@ -22,26 +23,26 @@ class Home extends Component {
   //   this.setState({userToken: token});
   // }
   
-  getToken = () => {
-    let token = window.location.href.split('?token=')[1];
-    console.log(token);
+  // getToken = () => {
+  //   let token = window.location.href.split('?token=')[1];
+  //   console.log(token);
     
-			if (token) {
-				// Put the object into storage
-        localStorage.setItem('token', token);
-        console.log(localStorage.getItem('token'));
-        this.setState({userToken: localStorage.getItem('token')}, () => {
-          console.log(this.state);
-          this.getUserInfo();
-        })
-      }
-  }
+	// 		if (token) {
+	// 			// Put the object into storage
+  //       localStorage.setItem('token', token);
+  //       console.log(localStorage.getItem('token'));
+  //       this.setState({userToken: localStorage.getItem('token')}, () => {
+  //         console.log(this.state);
+  //         this.getUserInfo();
+  //       })
+  //     }
+  // }
 
-  getUserInfo = () => {
-    axios.post("/user/profile", {token: this.state.userToken}).then(response => {
-      console.log(response.data);
-    })
-  };
+  // getUserInfo = () => {
+  //   axios.post("/user/profile", {token: this.state.userToken}).then(response => {
+  //     console.log(response.data);
+  //   })
+  // };
   
 
   loadAllPosts = () => {
@@ -50,6 +51,7 @@ class Home extends Component {
     axios.get(SERVER+"/public/loadall").then(res => {
       this.setState({ posts: res.data });
     });
+    console.log(this.props.userToken)
   };
 
   // loadPost = () => {
