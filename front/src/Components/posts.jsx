@@ -3,7 +3,7 @@ import Post from './post';
 
 class Posts extends Component {
     componentDidMount() {
-      this.props.onLoadAll();
+    //   this.props.onLoadAll();
     }
     
     render() { 

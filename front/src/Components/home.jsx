@@ -9,8 +9,7 @@ const SERVER = Config.URL.express;
 class Home extends Component {
   componentDidMount() {
     console.log("Home - Mounted");
-    // this.getToken();
-
+    this.loadAllPosts();
   }
 
   state = {
@@ -18,31 +17,7 @@ class Home extends Component {
     userToken: ''
   };
 
-  // getToken = () => {
-  //   let token = this.props.location.search.split('?token=')[1];
-  //   this.setState({userToken: token});
-  // }
   
-  // getToken = () => {
-  //   let token = window.location.href.split('?token=')[1];
-  //   console.log(token);
-    
-	// 		if (token) {
-	// 			// Put the object into storage
-  //       localStorage.setItem('token', token);
-  //       console.log(localStorage.getItem('token'));
-  //       this.setState({userToken: localStorage.getItem('token')}, () => {
-  //         console.log(this.state);
-  //         this.getUserInfo();
-  //       })
-  //     }
-  // }
-
-  // getUserInfo = () => {
-  //   axios.post("/user/profile", {token: this.state.userToken}).then(response => {
-  //     console.log(response.data);
-  //   })
-  // };
   
 
   loadAllPosts = () => {
@@ -51,7 +26,6 @@ class Home extends Component {
     axios.get(SERVER+"/public/loadall").then(res => {
       this.setState({ posts: res.data });
     });
-    console.log(this.props.userToken)
   };
 
   // loadPost = () => {
@@ -70,19 +44,27 @@ class Home extends Component {
   };
 
   handleVote = postid => {
-      console.log(this.state.posts.find(post => post._id == postid))
-      let post = this.state.posts.find(post => post._id == postid)
-      if(post.postVotes)
-      axios.post("/user/vote", {token: this.state.userToken, postId : postid}).then(response => {
+    let post = this.state.posts.find(post => post._id === postid)
+    const checkVote = obj => obj.userId === this.props.userData.userInfo._id;
+
+    if(post.postVotes.some(checkVote)===false){
+      axios.post("/user/vote", {token: this.props.userData.userToken, postId : postid}).then(response => {
         console.log(response.data);
+        if(response.data === 'User not verified'){
+          // HANDLE SOME KINDA TOAST HERE
+        }
         this.loadAllPosts();
-      })
+      })  
+    }else{
+      this.handleUnvote(postid);
+    }
   };
 
   handleUnvote = postid => {
-    axios.post("/user/unvote", {token: this.state.userToken, postId : postid}).then(response => {
+    axios.post("/user/unvote", {token: this.props.userData.userToken, postId : postid}).then(response => {
       console.log(response.data);
-    })
+      this.loadAllPosts();
+    })  
 };
 
   render() {
