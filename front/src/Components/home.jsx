@@ -7,12 +7,10 @@ import Config from "../config";
 const SERVER = Config.URL.express;
 
 class Home extends Component {
-  
-
   componentDidMount() {
     console.log("Home - Mounted");
-    this.loadAllPosts();
-    this.getToken();
+    // this.getToken();
+
   }
 
   state = {
@@ -20,16 +18,32 @@ class Home extends Component {
     userToken: ''
   };
 
-  getToken = () => {
-    let token = this.props.location.search.split('?token=')[1];
-    this.setState({userToken: token});
-  }
+  // getToken = () => {
+  //   let token = this.props.location.search.split('?token=')[1];
+  //   this.setState({userToken: token});
+  // }
+  
+  // getToken = () => {
+  //   let token = window.location.href.split('?token=')[1];
+  //   console.log(token);
+    
+	// 		if (token) {
+	// 			// Put the object into storage
+  //       localStorage.setItem('token', token);
+  //       console.log(localStorage.getItem('token'));
+  //       this.setState({userToken: localStorage.getItem('token')}, () => {
+  //         console.log(this.state);
+  //         this.getUserInfo();
+  //       })
+  //     }
+  // }
 
-  loadProfile = () => {
-    axios.get("auth/profile").then(res => {
-      console.log(res.data);
-    });
-  };
+  // getUserInfo = () => {
+  //   axios.post("/user/profile", {token: this.state.userToken}).then(response => {
+  //     console.log(response.data);
+  //   })
+  // };
+  
 
   loadAllPosts = () => {
     console.log("Loading posts");
@@ -37,6 +51,7 @@ class Home extends Component {
     axios.get(SERVER+"/public/loadall").then(res => {
       this.setState({ posts: res.data });
     });
+    console.log(this.props.userToken)
   };
 
   // loadPost = () => {
@@ -76,6 +91,7 @@ class Home extends Component {
         <NavBar/>
         <main className="container col-md-6 col-md-offset-3">
           <Posts
+            onLoadAll={this.loadAllPosts}
             posts={this.state.posts}
             onVote={this.handleVote}
             onUnvote={this.handleUnvote}
