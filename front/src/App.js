@@ -29,11 +29,6 @@ class App extends Component {
         console.log(response.data);
       })
   };
-  
-  state= {
-    userToken: "",
-    isLoggedIn: false
-  }
 
   getToken = () => {
     let token = window.location.href.split('?token=')[1];

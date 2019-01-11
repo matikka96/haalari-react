@@ -33,7 +33,7 @@ class creationForm extends Component {
         formData.append('postDescription', postDescription);
         formData.append('imageFile', imageFile);
 
-        axios.post(BACKURL+'/post/create').then(response => {
+        axios.post(BACKURL+'/user/create', {token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWMzNWU5NzBjZWVhOWM3NzI2YjdlNWJkIiwiaWF0IjoxNTQ3MTIxMzg2fQ.i0TjbJC6ZU4IYqoEEh82OVWLLasLCNod9NhEL5FckeQ"}).then(response => {
             console.log(response.data);
         })
           
