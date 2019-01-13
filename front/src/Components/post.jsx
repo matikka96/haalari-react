@@ -20,7 +20,8 @@ class Post extends Component {
                 <button
                     className="btn btn-secondary"
                     onClick={() => this.props.onVote(this.props.post._id)}
-                    >Vote
+                    >{((this.props.post.postVotes.filter(f => f.userId === this.props.userData.userInfo._id)).length === 0) ? 
+                      "Vote" : "Unvote"}
                 </button>
                 <span className="badge badge-success m-2">{this.props.post.postVotes.length}</span>
               </div>

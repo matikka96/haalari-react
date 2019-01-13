@@ -78,26 +78,26 @@ class Home extends Component {
 };
 
   render() {
-    return (
-      <>
-        <NavBar/>
+    return <>
+        <NavBar userData={this.props.userData} />
         <main className="container col-md-6 col-md-offset-3">
-        {this.state.selectedPost ? (
-            <SinglePost 
-              post={this.state.selectedPost} 
+          {this.state.selectedPost ? (
+            <SinglePost
+              post={this.state.selectedPost}
               onClearPost={this.clearPost}
               onVote={this.handleVote}
-              />
-          ) : 
+            />
+          ) : (
             <Posts
               onLoadAll={this.loadAllPosts}
               posts={this.state.posts}
               onVote={this.handleVote}
               onOpenPost={this.setSelectedPost}
-        />}
+              userData={this.props.userData}
+            />
+          )}
         </main>
-      </>
-    );
+      </>;
   }
 }
 
