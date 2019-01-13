@@ -16,14 +16,11 @@ class creationForm extends Component {
   };
 
   componentDidMount() {
-    this.setState({ isLoggedIn: this.props.userData.isLoggedIn }, () => {
-      console.log(this.state.isLoggedIn);
-    });
+    this.setState({ isLoggedIn: this.props.userData.isLoggedIn });
   }
 
   onFormSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
     const { postTitle, postDescription, imageFile } = this.state;
     const formData = new FormData();
     formData.append("title", postTitle);
@@ -48,45 +45,26 @@ class creationForm extends Component {
         this.setState({ [e.target.name]: e.target.value });
         break;
     }
-    // this.setState({ file: e.target.files[0] });
   };
 
   render() {
     const { postTitle, postDescription, postImage } = this.state;
-    return (
-      <>
-        <NavBar />
+    return <>
+        <NavBar userData={this.props.userData} />
 
         <main className="container col-md-6 col-md-offset-3">
           <form onSubmit={this.onFormSubmit}>
             <div className="form-group">
-              <label for="form-title">Title: </label>
-              <input
-                className="form-control"
-                type="text"
-                name="postTitle"
-                value={postTitle}
-                onChange={this.onChange}
-              />
+              <label htmlFor="form-title">Title: </label>
+              <input className="form-control" type="text" name="postTitle" value={postTitle} onChange={this.onChange} />
             </div>
             <div className="form-group">
-              <label for="form-description">Description: </label>
-              <input
-                className="form-control"
-                type="text"
-                name="postDescription"
-                value={postDescription}
-                onChange={this.onChange}
-              />
+              <label htmlFor="form-description">Description: </label>
+              <input className="form-control" type="text" name="postDescription" value={postDescription} onChange={this.onChange} />
             </div>
             <div className="form-group">
-              <label for="form-image">Image: </label>
-              <input
-                className="form-control"
-                type="file"
-                name="postImage"
-                onChange={this.onChange}
-              />
+              <label htmlFor="form-image">Image: </label>
+              <input className="form-control" type="file" name="postImage" onChange={this.onChange} />
             </div>
             <button className="btn btn-primary" type="submit">
               Submit
@@ -98,8 +76,7 @@ class creationForm extends Component {
             <button type="submit">Upload</button>
           </form> */}
         </main>
-      </>
-    );
+      </>;
   }
 }
 export default creationForm;

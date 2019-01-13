@@ -18,11 +18,11 @@ class Post extends Component {
             </div>
             <div className="card-body">
               {this.props.post.postVotes.filter(f => f.userId === this.props.userData.userInfo._id).length === 0 ? 
-                <button className="btn btn-success" onClick={() => this.props.onVote(this.props.post._id)}>
-                  Vote
+                <button className="btn btn-secondary" onClick={() => this.props.onVote(this.props.post._id)}>
+                  X
                 </button> : 
                 <button className="btn btn-danger" onClick={() => this.props.onVote(this.props.post._id)}>
-                  Unvote
+                  X
                 </button>
               }
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Home from './Components/home';
 import Form from './Components/form';
-import Profile from './Components/profile';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
@@ -15,7 +14,7 @@ class App extends Component {
 
   state = {
     userToken: '',
-    userInfo: {},
+    userInfo: '',
     isLoggedIn: false
   };
 
