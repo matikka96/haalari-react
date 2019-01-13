@@ -3,6 +3,7 @@ import NavBar from "./navbar";
 import Posts from "./posts";
 import axios from "axios";
 import Config from "../config";
+import SinglePost from "./singlepost"
 
 const SERVER = Config.URL.express;
 
@@ -14,12 +15,21 @@ class Home extends Component {
 
   state = {
     posts: [],
-    userToken: ''
+    userToken: '',
+    selectedPost: null
   };
 
   
-  
+  setSelectedPost = (post) => {
+    this.setState({selectedPost: post});
+    this.loadAllPosts();
+  }
 
+  clearPost = () => {
+    this.setState({selectedPost: null});
+    this.loadAllPosts();
+  }
+  
   loadAllPosts = () => {
     console.log("Loading posts");
     // Axios API request
@@ -72,13 +82,19 @@ class Home extends Component {
       <>
         <NavBar/>
         <main className="container col-md-6 col-md-offset-3">
-          <Posts
-            onLoadAll={this.loadAllPosts}
-            posts={this.state.posts}
-            onVote={this.handleVote}
-            onUnvote={this.handleUnvote}
-            onOpenPost={this.handleOpenPost}
-          />
+        {this.state.selectedPost ? (
+            <SinglePost 
+              post={this.state.selectedPost} 
+              onClearPost={this.clearPost}
+              onVote={this.handleVote}
+              />
+          ) : 
+            <Posts
+              onLoadAll={this.loadAllPosts}
+              posts={this.state.posts}
+              onVote={this.handleVote}
+              onOpenPost={this.setSelectedPost}
+        />}
         </main>
       </>
     );
