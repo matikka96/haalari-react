@@ -86,6 +86,7 @@ class Home extends Component {
               post={this.state.selectedPost}
               onClearPost={this.clearPost}
               onVote={this.handleVote}
+              userData={this.props.userData}
             />
           ) : (
             <Posts
