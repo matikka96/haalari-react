@@ -86,6 +86,7 @@ class Home extends Component {
               post={this.state.posts.find(post => post._id === this.state.selectedPost)}
               onClearPost={this.clearPost}
               onVote={this.handleVote}
+              onOpenPost={this.setSelectedPost}
               userData={this.props.userData}
             />
           ) : (
