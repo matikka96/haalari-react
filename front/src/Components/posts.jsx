@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import Post from './post';
+import React, { Component } from "react";
+import Post from "./post";
 
 class Posts extends Component {
-    componentDidMount() {
+  componentDidMount() {
     //   this.props.onLoadAll();
-    }
-    
-    render() { 
-        const {onVote, onUnvote, posts, onOpenPost} = this.props;
-        return <>
-            {posts
-              .reverse()
-              .map(post => (
-                <Post
-                  key={post._id}
-                  onVote={onVote}
-                  onUnvote={onUnvote}
-                  onOpenPost={onOpenPost}
-                  post={post}
-                  userData={this.props.userData}
-                />
-              ))}
-          </>;
-    }
+  }
+
+  render() {
+    const { onVote, onUnvote, posts, onOpenPost } = this.props;
+    return (
+      <>
+        {posts.reverse().map(post => (
+          <Post
+            key={post._id}
+            onVote={onVote}
+            onUnvote={onUnvote}
+            onOpenPost={onOpenPost}
+            post={post}
+            userData={this.props.userData}
+          />
+        ))}
+      </>
+    );
+  }
 }
- 
+
 export default Posts;
