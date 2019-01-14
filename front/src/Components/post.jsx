@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Config from "../config";
-import octicons from "octicons";
 
 const BACKURL = Config.URL.express;
 

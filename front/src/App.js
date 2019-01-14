@@ -8,7 +8,6 @@ import axios from 'axios';
 
 class App extends Component {
   componentDidMount(){
-    console.log('App - Mounted');
     this.getToken();
   }
 
@@ -20,13 +19,11 @@ class App extends Component {
 
   getToken = () => {
     let token = window.location.href.split('?token=')[1];
-    console.log(token);
 
     
 			if (token) {
         // Put the object into storage
         localStorage.setItem('token', token);
-        console.log(localStorage.getItem('token'));
 
         this.setState({userToken: localStorage.getItem('token')}, () => {
           this.getUserInfo();

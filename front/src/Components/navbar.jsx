@@ -4,7 +4,6 @@ class NavBar extends Component {
   state = {}
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
-      console.log('navbar - cdu')
       this.setState({userToken: this.props.userData.userToken});
     }
   }

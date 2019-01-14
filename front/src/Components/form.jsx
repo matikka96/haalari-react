@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import NavBar from "./navbar";
 import Config from "../config";
-import { Redirect } from "react-router-dom";
 
 const BACKURL = Config.URL.express;
 
@@ -36,7 +35,6 @@ class creationForm extends Component {
   }
 
   onChange = e => {
-    console.log(e.target.name);
     switch (e.target.name) {
       case "postImage":
         this.setState({ imageFile: e.target.files[0] });
@@ -48,7 +46,7 @@ class creationForm extends Component {
   };
 
   render() {
-    const { postTitle, postDescription, postImage } = this.state;
+    const { postTitle, postDescription } = this.state;
     return <>
         <NavBar userData={this.props.userData} />
 

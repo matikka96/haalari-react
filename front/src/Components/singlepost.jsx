@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Post from './post';
-import Config from '../config';
 
 class SinglePost extends Component {
     state = { 
