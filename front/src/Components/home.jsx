@@ -21,7 +21,7 @@ class Home extends Component {
 
   
   setSelectedPost = (post) => {
-    this.setState({selectedPost: post});
+    this.setState({selectedPost: post._id});
     this.loadAllPosts();
   }
 
@@ -83,7 +83,7 @@ class Home extends Component {
         <main className="container col-md-6 col-md-offset-3">
           {this.state.selectedPost ? (
             <SinglePost
-              post={this.state.selectedPost}
+              post={this.state.posts.find(post => post._id === this.state.selectedPost)}
               onClearPost={this.clearPost}
               onVote={this.handleVote}
               userData={this.props.userData}
