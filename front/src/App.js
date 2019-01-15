@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Home from "./Components/home";
 import Form from "./Components/form";
+import Profile from "./Components/profile";
 import { Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -54,7 +55,7 @@ class App extends Component {
         <Route path="/form" render={routeProps => <Form {...routeProps} userData={this.state} />} />
         <Route
           path="/profile"
-          render={routeProps => <Form {...routeProps} userData={this.state} />}
+          render={routeProps => <Profile {...routeProps} userData={this.state} />}
         />
         <Route path="http://localhost:3001/" />
       </>

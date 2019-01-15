@@ -1,49 +1,36 @@
-import React, { Component } from 'react';
-import NavBar from './navbar';
-import axios from "axios";
-import Config from "../config";
-const SERVER = Config.URL.express;
+import React, { Component } from "react";
+import NavBar from "./navbar";
 
 class Profile extends Component {
-	
-	constructor(props) {
+  constructor(props) {
     super(props);
     console.log("Profile - Constructor");
-    
   }
 
   componentDidMount() {
     console.log("Profile - Mounted");
-    // let token = localStorage.getItem('token');
-    // if (token) {
-    //   this.setState({userToken: token.replace('"','')});
-    //   console.log('User loaded')
-    // } else {
-    //   console.log('User not logged')
-    // }
   }
 
-  state = {
-    user: 'Matti'
+  render() {
+    return (
+      <>
+        <NavBar/>
+        <div className="card mx-auto" style={{ maxWidth: 400 }}>
+          <img
+            src={this.props.userData.userInfo}
+            alt="Avatar"
+            className="card-img-top"
+          />
+          <div className="card-body">
+            <h5 className="card-title">{this.props.userData.userInfo.username}</h5>
+            <p className="card-text">{this.props.userData.userInfo.email}</p>
+            <p className="card-text">{this.props.userData.userInfo.dateOfCreation}</p>
+          </div>
+          
+        </div>
+      </>
+    );
   }
-
-  // loadProfile = () => {
-  // 	// Retrieve the object from storage
-		// axios.post(SERVER+"/user/profile", {token: this.state.userToken}).then(response => {
-  //     console.log(response.data);
-  //   })
-  // }
-
-	render() {
-		return (
-			<div>
-				<NavBar />
-				<div className="container">
-          <p>User: {this.state.user}</p>
-				</div>
-			</div>
-		);
-	}
 }
 
 export default Profile;
