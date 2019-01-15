@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class NavBar extends Component {
-  state = {}
+  state = {};
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
-      this.setState({userToken: this.props.userData.userToken});
+      this.setState({ userToken: this.props.userData.userToken });
     }
   }
   logout = () => {
-    localStorage.removeItem('token');
-    console.log('User logged out');
-    window.location.href="/";
-  }
+    localStorage.removeItem("token");
+    console.log("User logged out");
+    window.location.href = "/";
+  };
   render() {
     return <nav className="navbar sticky-top navbar-dark bg-dark fixedTop">
         <div className="dropdown">
@@ -19,10 +19,18 @@ class NavBar extends Component {
             Account
           </button>
           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            {(this.state.userToken !== "") ? 
-            <a className="dropdown-item" href="#" onClick={this.logout}>Logout</a> : 
-            <a className="dropdown-item" href="http://localhost:3001/auth/google">Login</a>}
-            <a className="dropdown-item" href="/profile">Profile</a>
+            {this.state.userToken !== "" ? <div>
+                <a className="dropdown-item" href="#" onClick={this.logout}>
+                  Logout
+                </a>
+                <a className="dropdown-item" href="/profile">
+                  Profile
+                </a>
+              </div> : <div>
+                <a className="dropdown-item" href="http://localhost:3001/auth/google">
+                  Login
+                </a>
+              </div>}
           </div>
         </div>
         <a className="navbar-brand" href="/">
@@ -33,8 +41,8 @@ class NavBar extends Component {
             New Post
           </button>
         </a>
-      </nav>;        
+      </nav>;
   }
 }
- 
+
 export default NavBar;

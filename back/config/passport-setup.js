@@ -25,10 +25,11 @@ passport.use(
 				console.log('USER ALREADY EXISTS: \n' + currentUser);
 				done(null, currentUser);
 			} else {
+				console.log(profile.photos[0].value);
 				new User({
 					username: profile.displayName,
 					googleId: profile.id,
-					// avatar: profile.image,
+					avatar: profile.photos[0].value,
 					email: profile.emails[0].value,
 					dateOfCreation: Date.now()
 				}).save().then((newUser) => {
