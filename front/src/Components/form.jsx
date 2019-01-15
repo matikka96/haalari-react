@@ -51,7 +51,7 @@ class creationForm extends Component {
         <NavBar userData={this.props.userData} />
 
         <main className="container col-md-6 col-md-offset-3">
-          <form onSubmit={this.onFormSubmit}>
+          <form className="m-4" onSubmit={this.onFormSubmit}>
             <div className="form-group">
               <label htmlFor="form-title">Title: </label>
               <input className="form-control" type="text" name="postTitle" value={postTitle} onChange={this.onChange} />
@@ -62,7 +62,7 @@ class creationForm extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="form-image">Image: </label>
-              <input className="form-control" type="file" name="postImage" onChange={this.onChange} />
+              <input className="form-control-file" type="file" name="postImage" onChange={this.onChange} />
             </div>
             <button className="btn btn-primary" type="submit">
               Submit

@@ -9,7 +9,7 @@ class SinglePost extends Component {
         const { onVote, onUnvote, onOpenPost } = this.props;
         const post = this.props.post;
         return ( 
-            <div className="card mx-auto" style={{maxWidth: 400}}>
+            <div className="m-3 mx-auto" style={{maxWidth: 400}}>
               
               <button
                 className="btn btn-secondary"

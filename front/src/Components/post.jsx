@@ -7,7 +7,7 @@ class Post extends Component {
   render() {
     const imageurl = BACKURL + "/" + this.props.post.postImg;
     return (
-      <div className="card mx-auto" style={{ maxWidth: 400 }}>
+      <div className="card mx-auto m-3" style={{ maxWidth: 400 }}>
         <img
           src={imageurl}
           alt="patch"

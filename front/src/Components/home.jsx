@@ -8,6 +8,12 @@ import SinglePost from "./singlepost";
 const SERVER = Config.URL.express;
 
 class Home extends Component {
+  state = {
+    posts: [],
+    userToken: "",
+    selectedPost: null
+  };
+  
   componentDidMount() {
     this.loadAllPosts();
   }
@@ -16,12 +22,6 @@ class Home extends Component {
       this.loadAllPosts();
     }
   }
-
-  state = {
-    posts: [],
-    userToken: "",
-    selectedPost: null
-  };
 
   setSelectedPost = post => {
     this.setState({ selectedPost: post._id });

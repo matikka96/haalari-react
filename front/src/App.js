@@ -16,6 +16,11 @@ class App extends Component {
   componentDidMount() {
     this.getToken();
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.userToken !== this.state.userToken) {
+      this.getToken();
+    }
+  }
 
   getToken = () => {
     let token = window.location.href.split("?token=")[1];
