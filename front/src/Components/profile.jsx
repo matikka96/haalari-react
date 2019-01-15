@@ -12,24 +12,20 @@ class Profile extends Component {
   }
 
   render() {
-    return (
-      <>
-        <NavBar/>
-        <div className="card mx-auto" style={{ maxWidth: 400 }}>
-          <img
-            src={this.props.userData.userInfo}
-            alt="Avatar"
-            className="card-img-top"
-          />
-          <div className="card-body">
-            <h5 className="card-title">{this.props.userData.userInfo.username}</h5>
-            <p className="card-text">{this.props.userData.userInfo.email}</p>
-            <p className="card-text">{this.props.userData.userInfo.dateOfCreation}</p>
+    return <>
+        <NavBar />
+        <div className="media mx-auto container m-4">
+          <img src={this.props.userData.userInfo.avatar} className="mr-3" alt="avatar" />
+          <div className="media-body">
+            <h5 className="mt-0">{this.props.userData.userInfo.username}</h5>
+            <p>
+              {this.props.userData.userInfo.email}
+              <br />
+              {this.props.userData.userInfo.dateOfCreation}
+            </p>
           </div>
-          
         </div>
-      </>
-    );
+      </>;
   }
 }
 
