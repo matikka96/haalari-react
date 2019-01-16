@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 
+
 class NavBar extends Component {
   state = {};
+  componentDidMount() {
+    
+  }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
       this.setState({ userToken: this.props.userData.userToken });
@@ -15,37 +19,42 @@ class NavBar extends Component {
   render() {
     return <div className="navbar-fixed">
         <nav className="blue darken-3">
-          <div className=" container nav-wrapper">
+          <div className="nav-wrapper">
             <a className="brand-logo center" href="/">
               Merkkitori
             </a>
-              {this.state.userToken !== "" ? <div>
-                  {/* <li>
+            {/* <a class="btn tooltipped" data-position="bottom" data-tooltip="I am a tooltip">
+              Hover me!
+            </a> */}
+            {this.state.userToken !== "" ? <div>
+                {/* <li>
                     <a className="dropdown-item" href="#" onClick={this.logout}>
                       Logout
                     </a>
                   </li> */}
-                  <ul className="left">
-                    <li>
-                      <a className="dropdown-item" href="/profile">
-                        <i className="material-icons">account_circle</i>
-                      </a>
-                    </li>
-                  </ul>
-                  <ul className="right">
-                    <li>
-                      <a href="/form">
-                        <i className="material-icons">add</i>
-                      </a>
-                    </li>
-                  </ul>
-                </div> : <div>
+                <ul className="left">
                   <li>
-                    <a className="dropdown-item" href="http://localhost:3001/auth/google">
-                      Login
+                    <a className="dropdown-item" href="/profile">
+                      <i className="material-icons tooltipped" data-tooltip="Account">
+                        account_circle
+                      </i>
                     </a>
                   </li>
-                </div>}
+                </ul>
+                <ul className="right">
+                  <li>
+                    <a href="/form">
+                      <i className="material-icons tooltipped" data-tooltip="Create new post">add</i>
+                    </a>
+                  </li>
+                </ul>
+              </div> : <div>
+                <li>
+                  <a className="dropdown-item" href="http://localhost:3001/auth/google">
+                    Login
+                  </a>
+                </li>
+              </div>}
           </div>
         </nav>
       </div>;
