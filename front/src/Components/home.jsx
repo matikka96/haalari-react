@@ -12,7 +12,7 @@ class Home extends Component {
     posts: [],
     userToken: "",
     selectedPost: null
-  };
+  }
   
   componentDidMount() {
     this.loadAllPosts();

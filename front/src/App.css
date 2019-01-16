@@ -1,0 +1,26 @@
+.post-badge {
+  /* background-color: gainsboro; */
+  padding: 1px 5px;
+  border-radius: 5px;
+  margin: 0 5px;
+}
+.post-action {
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+.posts {
+  max-width: 450px;
+  margin: auto;
+}
+.row {
+  margin: 0;
+}
+.responsive-img {
+  width: 100%;
+}
+.profile-avatar {
+  max-width: 50px;
+}
+.app-center {
+  margin: auto;
+}
