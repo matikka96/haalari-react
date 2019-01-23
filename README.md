@@ -1,9 +1,11 @@
-# haalari-react
+# Haalarimerkkitori
 
-## Todo
+This was originally a school project for React boot camp course.
 
-* duplicate check on vote request
-* open post seperately
-* save avatar url to DB
-* Account view (username, avatar, sign up date etc...)
-* COMMENTS
+The idea behind this app is to provide an easy to use patch sharing platform. Users are able to post own ideas and also like and share others. 
+
+!screenshot()
+
+## Technologies
+Application has been built in **React** and styled with **Materialize.css**. 
+Server is running on **Node.js** with the help of **Express.js** framework. **Passport.js** handles Google authentication and **MongoSB** is used for database. 
